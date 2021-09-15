@@ -2,16 +2,20 @@ import { GetServerSideProps, NextPage } from "next";
 import Link from "next/link";
 import Head from "next/head";
 
-import Hello from "components/Hello";
+import Pagination from "components/Pagination";
 
 import styles from "styles/app.module.scss";
 
-interface IProps {
-  hello: string;
-  file: JSON;
+export interface Item {
+  title: string;
+  desc: string;
 }
 
-const Home: NextPage<IProps> = ({ hello, file }): JSX.Element => (
+export interface IProps {
+  hello: string;
+  file: Item[];
+}
+const Home: NextPage<IProps> = ({ file }): JSX.Element => (
   <div className={styles.container}>
     <Head>
       <title>Create Next App</title>
@@ -20,14 +24,8 @@ const Home: NextPage<IProps> = ({ hello, file }): JSX.Element => (
     </Head>
 
     <main className={styles.main}>
-      <Hello />
-      <p>{hello}</p>
-
-      <hr />
-
-      <Link href="/original">
-        <a>The Original Starter Page (Client side link)</a>
-      </Link>
+      {console.log(file)}
+      <Pagination data={file} />
     </main>
   </div>
 );
